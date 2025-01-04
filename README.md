@@ -20,7 +20,8 @@ This is a training project built with [NestJS](https://github.com/nestjs/nest) f
 1. Clone the repository
 2. Install dependencies with `pnpm install`
 3. Set up your database connection in the `.env` file and `.env.test.local` file
-4. Run the development server with `pnpm run start:dev`
+4. Run docker with db `db:dev:restart`
+5. Run the development server with `pnpm run start:dev`
 
 ## Testing
 
@@ -43,3 +44,7 @@ To run E2E tests, use the following command:
 ```bash
 pnpm test:e2e
 ```
+
+## API
+
+In the `api` folder, there is API documentation in JSON format exported from Insomnia.

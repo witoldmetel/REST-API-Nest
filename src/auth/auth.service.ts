@@ -1,10 +1,5 @@
-import {
-  ForbiddenException,
-  HttpCode,
-  HttpStatus,
-  Injectable,
-} from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { ForbiddenException, Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
 import { AuthDto } from './dto';
 import * as argon from 'argon2';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
@@ -26,7 +21,6 @@ export class AuthService {
     );
   }
 
-  @HttpCode(HttpStatus.CREATED)
   async signup(dto: AuthDto): Promise<{ access_token: string }> {
     // generate the password hash
     const hash = await argon.hash(dto.password);
@@ -49,7 +43,6 @@ export class AuthService {
     }
   }
 
-  @HttpCode(HttpStatus.OK)
   async signin(dto: AuthDto): Promise<{ access_token: string }> {
     // find the user by email
     const user = await this.prisma.user.findUnique({
@@ -60,7 +53,7 @@ export class AuthService {
 
     //compare the password hash
     const match = await argon.verify(user.password, dto.password);
-    // if pssword incorrect, throw an error
+    // if password incorrect, throw an error
     if (!match) throw new ForbiddenException('Invalid email or password');
 
     const token = await this.signToken(user.id, user.email);

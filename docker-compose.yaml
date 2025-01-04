@@ -4,7 +4,7 @@ services:
   db:
     image: postgres:latest
     ports:
-      - '5432:5432'
+      - '5434:5434'
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
@@ -12,5 +12,17 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
+  test_db:
+    image: postgres:latest
+    ports:
+      - '5435:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: nest_test
+    volumes:
+      - test_db_data:/var/lib/postgresql/data
+
 volumes:
   db_data:
+  test_db_data:

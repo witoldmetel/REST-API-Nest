@@ -16,17 +16,17 @@
     "db:dev:up": "docker-compose up db -d",
     "db:dev:rm": "docker-compose rm db -s -f -v",
     "db:dev:restart": "pnpm run db:dev:rm && pnpm run db:dev:up && sleep 1 && pnpm run prisma:dev:deploy",
-    "prisma:test:deploy": "dotenv -e ./.env.test -o -- prisma migrate deploy",
-    "db:test:up": "docker-compose up test_db -d",
+    "prisma:test:deploy": "dotenv -e .env.test.local -- prisma migrate deploy",
+    "db:test:up": "docker-compose up test_db -d --force-recreate",
     "db:test:rm": "docker-compose rm test_db -s -f -v",
-    "db:test:restart": "pnpm run db:test:rm && pnpm run db:test:up && sleep 1 && pnpm run prisma:test:deploy",
+    "db:test:restart": "pnpm run db:test:rm && pnpm run db:test:up && sleep 3 && pnpm run prisma:test:deploy",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "pretest:e2e": "pnpm run db:test:restart",
-    "test:e2e": "dotenv -e .env.test -o -- jest --watch --no-cache --config ./test/jest-e2e.json"
+    "test:e2e": "dotenv -e .env.test.local -- jest --watch --no-cache --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

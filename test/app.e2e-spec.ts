@@ -39,6 +39,7 @@ describe('App e2e', () => {
       email: 'vlad@gmail.com',
       password: '123',
     };
+
     describe('Signup', () => {
       it('should throw if email empty', () => {
         return pactum
@@ -49,6 +50,7 @@ describe('App e2e', () => {
           })
           .expectStatus(400);
       });
+
       it('should throw if password empty', () => {
         return pactum
           .spec()
@@ -58,9 +60,11 @@ describe('App e2e', () => {
           })
           .expectStatus(400);
       });
+
       it('should throw if no body provided', () => {
         return pactum.spec().post('/auth/signup').expectStatus(400);
       });
+
       it('should signup', () => {
         return pactum
           .spec()
@@ -80,6 +84,7 @@ describe('App e2e', () => {
           })
           .expectStatus(400);
       });
+
       it('should throw if password empty', () => {
         return pactum
           .spec()
@@ -89,9 +94,11 @@ describe('App e2e', () => {
           })
           .expectStatus(400);
       });
+
       it('should throw if no body provided', () => {
         return pactum.spec().post('/auth/signin').expectStatus(400);
       });
+
       it('should signin', () => {
         return pactum
           .spec()
@@ -119,9 +126,10 @@ describe('App e2e', () => {
     describe('Edit user', () => {
       it('should edit user', () => {
         const dto: EditUserDto = {
-          firstName: 'Vladimir',
-          email: 'vlad@codewithvlad.com',
+          firstName: 'Witold  ',
+          email: 'witold@gmail.com',
         };
+
         return pactum
           .spec()
           .patch('/users')
@@ -155,6 +163,7 @@ describe('App e2e', () => {
         title: 'First Bookmark',
         link: 'https://www.youtube.com/watch?v=d6WC5n9G_sM',
       };
+
       it('should create bookmark', () => {
         return pactum
           .spec()
@@ -202,6 +211,7 @@ describe('App e2e', () => {
         description:
           'Learn how to use Kubernetes in this complete course. Kubernetes makes it possible to containerize applications and simplifies app deployment to production.',
       };
+
       it('should edit bookmark', () => {
         return pactum
           .spec()
